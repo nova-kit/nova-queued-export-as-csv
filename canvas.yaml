@@ -1,0 +1,27 @@
+preset: package
+
+namespace: NovaKit\NovaQueuedExportAsCsv
+user-auth-provider: Illuminate\Foundation\Auth\User
+
+paths:
+  src: src
+  resource: resources
+
+factory:
+  path: database/factories
+
+migration:
+  path: database/migrations
+  prefix: ''
+
+console:
+  namespace: NovaKit\NovaQueuedExportAsCsv\Console
+
+model:
+  namespace: NovaKit\NovaQueuedExportAsCsv
+
+provider:
+  namespace: NovaKit\NovaQueuedExportAsCsv
+
+testing:
+  namespace: NovaKit\NovaQueuedExportAsCsv\Tests

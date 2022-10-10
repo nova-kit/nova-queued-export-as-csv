@@ -1,0 +1,50 @@
+{
+    "name": "nova-kit/nova-queued-export-as-csv",
+    "description": "Queued Export As CSV Action",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mior Muhammad Zaki",
+            "email": "crynobone@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "NovaKit\\NovaQueuedExportAsCsv\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "NovaKit\\NovaQueuedExportAsCsv\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^7.3 || ^8.0",
+        "laravie/serialize-queries": "^2.0"
+    },
+    "require-dev": {
+        "laravel/nova": "^4.14",
+        "orchestra/testbench": "^6.25 || ^7.6",
+        "orchestra/canvas": "^6.10.3 || ^7.2.1",
+        "nunomaduro/larastan": "^1.0.1 || ^2.0"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://nova.laravel.com"
+        }
+    ],
+    "extra": {
+        "branch-alias": {
+            "dev-main": "1.x-dev"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "@php ./vendor/bin/testbench package:discover --ansi"
+        ]
+    },
+    "prefer-stable": true,
+    "minimum-stability": "dev"
+}
