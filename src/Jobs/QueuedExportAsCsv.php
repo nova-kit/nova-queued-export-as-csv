@@ -83,11 +83,12 @@ class QueuedExportAsCsv implements ShouldQueue
             }
         };
 
+        $withFormatCallback = ! is_null($this->withFormatCallback) ? unserialize($this->withFormatCallback)->getClosure() : null;
         $userModel = Util::userModel();
         $storageDisk = $this->options['storageDisk'];
         $filename = $this->options['filename'];
 
-        $exportedFilename = (new FastExcel($eloquentGenerator()))->export("/tmp/{$filename}", $this->withFormatCallback);
+        $exportedFilename = (new FastExcel($eloquentGenerator()))->export("/tmp/{$filename}", $withFormatCallback);
 
         $storedFilename = Storage::disk($storageDisk)->putFileAs(
             'nova-actions-export-as-csv', new File($exportedFilename), $filename, 'public'

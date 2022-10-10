@@ -9,6 +9,7 @@ use Laravel\Nova\Actions\ExportAsCsv;
 use Laravel\Nova\Actions\Response;
 use Laravel\Nova\Fields\ActionFields;
 use Laravel\Nova\Http\Requests\ActionRequest;
+use Laravel\SerializableClosure\SerializableClosure;
 use NovaKit\NovaQueuedExportAsCsv\Jobs\QueuedExportAsCsv as QueuedExportAsCsvJobs;
 use function Laravie\SerializesQuery\serialize;
 
@@ -92,7 +93,7 @@ class QueuedExportAsCsv extends ExportAsCsv
         $job = new QueuedExportAsCsvJobs(
             serialize($query),
             $request->user()->getKey(),
-            $this->withFormatCallback,
+            ! is_null($this->withFormatCallback) ? \serialize(new SerializableClosure($this->withFormatCallback) : null,
             /* @var array{exportFilename: string, storageDisk: string|null, notify: string} */
             [
                 'filename' => $exportFilename,
