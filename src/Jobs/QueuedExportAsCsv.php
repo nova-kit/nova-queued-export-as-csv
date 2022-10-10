@@ -83,7 +83,8 @@ class QueuedExportAsCsv implements ShouldQueue
             }
         };
 
-        $withFormatCallback = ! is_null($this->withFormatCallback) ? unserialize($this->withFormatCallback)->getClosure() : null;
+        $withFormatCallback = ! is_null($this->withFormatCallback) ? \unserialize($this->withFormatCallback)->getClosure() : null;
+
         $userModel = Util::userModel();
         $storageDisk = $this->options['storageDisk'];
         $filename = $this->options['filename'];

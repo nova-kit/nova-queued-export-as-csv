@@ -93,7 +93,7 @@ class QueuedExportAsCsv extends ExportAsCsv
         $job = new QueuedExportAsCsvJobs(
             serialize($query),
             $request->user()->getKey(),
-            ! is_null($this->withFormatCallback) ? \serialize(new SerializableClosure($this->withFormatCallback) : null,
+            ! is_null($this->withFormatCallback) ? \serialize(new SerializableClosure($this->withFormatCallback)) : null,
             /* @var array{exportFilename: string, storageDisk: string|null, notify: string} */
             [
                 'filename' => $exportFilename,
