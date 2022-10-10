@@ -44,3 +44,38 @@ return [
     QueuedExportAsCsv::make()->withStorageDisk('s3'),
 ];
 ```
+
+In order to handle the stored CSV, you need to listen to `NovaKit\NovaQueuedExportAsCsv\Events\QueuedCsvExported` event, as an example you can broadcast to Nova's Notification using the following listener class:
+
+```php
+<?php
+
+namespace App\Listeners;
+
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Storage;
+use Laravel\Nova\Notifications\NovaNotification;
+use Laravel\Nova\URL;
+use NovaKit\NovaQueuedExportAsCsv\Events\QueuedCsvExported;
+
+class NotifyCsvExported
+{
+    /**
+     * Handle the event.
+     *
+     * @param  \NovaKit\NovaQueuedExportAsCsv\Events\QueuedCsvExported  $event
+     * @return void
+     */
+    public function handle(QueuedCsvExported $event)
+    {
+        $event->user->notify(
+            NovaNotification::make()
+                ->message('Your CSV is ready to download.')
+                ->action('Download', URL::remote(Storage::disk($event->storageDisk)->url($event->filename)))
+                ->icon('download')
+                ->type('info')
+        );
+    }
+}
+```
