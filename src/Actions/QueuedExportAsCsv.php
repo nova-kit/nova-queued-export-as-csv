@@ -12,7 +12,7 @@ use Laravel\Nova\Http\Requests\ActionRequest;
 use NovaKit\NovaQueuedExportAsCsv\Jobs\QueuedExportAsCsv as QueuedExportAsCsvJobs;
 use function Laravie\SerializesQuery\serialize;
 
-class VaporQueuedExportAsCsv extends ExportAsCsv
+class QueuedExportAsCsv extends ExportAsCsv
 {
     /**
      * Storage disk used to store the file.
