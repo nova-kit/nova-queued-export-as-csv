@@ -56,19 +56,6 @@ class VaporQueuedExportAsCsv extends ExportAsCsv
     }
 
     /**
-     * Set to delete file after send.
-     *
-     * @param  bool  $deleteFileAfterSend
-     * @return $this
-     */
-    public function deleteFileAfterSend(bool $deleteFileAfterSend = true)
-    {
-        $this->deleteFileAfterSend = $deleteFileAfterSend;
-
-        return $this;
-    }
-
-    /**
      * Perform the action request using custom dispatch handler.
      *
      * @param  \Laravel\Nova\Http\Requests\ActionRequest  $request
@@ -106,11 +93,10 @@ class VaporQueuedExportAsCsv extends ExportAsCsv
             serialize($query),
             $request->user()->getKey(),
             $this->withFormatCallback,
-            /* @var array{exportFilename: string, deleteFileAfterSend: bool, storageDisk: string|null, notify: string} */
+            /* @var array{exportFilename: string, storageDisk: string|null, notify: string} */
             [
                 'filename' => $exportFilename,
                 'extension' => $extension,
-                'deleteFileAfterSend' => $this->deleteFileAfterSend,
                 'storageDisk' => $this->storageDisk,
                 'notify' => 'email',
             ],

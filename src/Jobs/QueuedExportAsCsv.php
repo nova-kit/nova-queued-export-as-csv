@@ -44,7 +44,7 @@ class QueuedExportAsCsv implements ShouldQueue
     /**
      * The configuration options.
      *
-     * @var array{filename: string, deleteFileAfterSend: bool, storageDisk: string|null, notify: string}
+     * @var array{filename: string, storageDisk: string|null, notify: string}
      */
     public $options;
 
@@ -54,7 +54,7 @@ class QueuedExportAsCsv implements ShouldQueue
      * @param  array<string, mixed>  $query
      * @param  string|int  $userId
      * @param  callable  $withFormatCallback
-     * @param  array{filename: string, deleteFileAfterSend: bool, storageDisk: string|null, notify: string}  $options
+     * @param  array{filename: string, storageDisk: string|null, notify: string}  $options
      * @return void
      */
     public function __construct(array $query, $userId, $withFormatCallback, array $options)
@@ -64,8 +64,6 @@ class QueuedExportAsCsv implements ShouldQueue
         $this->withFormatCallback = $withFormatCallback;
 
         $this->options = array_merge([
-            'notify' => 'email',
-            'deleteFileAfterSend' => false,
             'storageDisk' => null,
         ], $options);
     }
