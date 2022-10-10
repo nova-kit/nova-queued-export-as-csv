@@ -1,6 +1,6 @@
 {
     "name": "nova-kit/nova-queued-export-as-csv",
-    "description": "Queued Export As CSV Action",
+    "description": "Laravel Nova's Queued Export As CSV Action",
     "type": "library",
     "license": "MIT",
     "authors": [
