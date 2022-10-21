@@ -21,6 +21,7 @@
     },
     "require": {
         "php": "^7.3 || ^8.0",
+        "illuminate/support": "^8.67 || ^9.0",
         "laravie/serialize-queries": "^2.0",
         "laravel/serializable-closure": "^1.0"
     },
