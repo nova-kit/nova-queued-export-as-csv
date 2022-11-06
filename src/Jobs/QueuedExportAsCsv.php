@@ -83,6 +83,7 @@ class QueuedExportAsCsv implements ShouldQueue
             }
         };
 
+        /** @phpstan-ignore-next-line */
         $withFormatCallback = ! is_null($this->withFormatCallback) ? \unserialize($this->withFormatCallback)->getClosure() : null;
 
         $userModel = Util::userModel();
