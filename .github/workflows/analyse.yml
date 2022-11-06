@@ -34,6 +34,10 @@ jobs:
         run: |
           composer config http-basic.nova.laravel.com ${{ secrets.NOVA_USERNAME }} ${{ secrets.NOVA_PASSWORD }}
 
+      - name: Install Laravel Pint
+        run: |
+          composer require "laravel/pint:^1.1" --no-interaction --no-update
+
       - name: Install dependencies
         uses: "ramsey/composer-install@v2"
         with:
@@ -42,6 +46,9 @@ jobs:
 
       - name: Installed dependencies
         run: composer show -D
+
+      - name: Execute Code Style Analysis
+        run: vendor/bin/pint --test
 
       - name: Execute Static Code Analysis
         run: vendor/bin/phpstan analyse
