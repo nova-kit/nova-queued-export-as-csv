@@ -16,7 +16,7 @@ class QueuedExportAsCsvActionTest extends TestCase
         Queue::fake();
 
         $user = UserFactory::new()->create();
-        $users = UserFactory::new()->times(11)->create();
+        UserFactory::new()->times(10)->create();
 
         $response = $this->withoutMix()
             ->actingAs($user)

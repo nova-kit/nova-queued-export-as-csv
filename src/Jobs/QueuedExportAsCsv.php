@@ -37,7 +37,7 @@ class QueuedExportAsCsv implements ShouldQueue
     /**
      * The custom format callback.
      *
-     * @var (\Closure(\Illuminate\Database\Eloquent\Model):array<string, mixed>)|null
+     * @var (callable(\Illuminate\Database\Eloquent\Model):array<string, mixed>)|null
      */
     public $withFormatCallback;
 
@@ -53,7 +53,7 @@ class QueuedExportAsCsv implements ShouldQueue
      *
      * @param  array<string, mixed>  $query
      * @param  string|int  $userId
-     * @param  callable  $withFormatCallback
+     * @param  (callable(\Illuminate\Database\Eloquent\Model):array<string, mixed>)|null  $withFormatCallback
      * @param  array{filename: string, storageDisk: string|null, notify: string}  $options
      * @return void
      */
