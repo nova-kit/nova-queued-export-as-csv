@@ -26,6 +26,7 @@
         "laravel/serializable-closure": "^1.0"
     },
     "require-dev": {
+        "guzzlehttp/guzzle": "^7.2",
         "orchestra/testbench": "^6.25 || ^7.6",
         "orchestra/canvas": "^6.10.3 || ^7.2.1",
         "nunomaduro/larastan": "^1.0.1 || ^2.0"
@@ -42,9 +43,7 @@
         }
     },
     "scripts": {
-        "post-autoload-dump": [
-            "@php ./vendor/bin/testbench package:discover --ansi"
-        ]
+        "post-autoload-dump": "@php vendor/bin/testbench package:discover --ansi"
     },
     "prefer-stable": true,
     "minimum-stability": "dev"
