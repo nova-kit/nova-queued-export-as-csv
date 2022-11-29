@@ -1,0 +1,2 @@
+providers:
+  - NovaKit\NovaQueuedExportAsCsv\Tests\NovaServiceProvider
