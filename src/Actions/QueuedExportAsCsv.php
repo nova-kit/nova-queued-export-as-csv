@@ -124,7 +124,7 @@ class QueuedExportAsCsv extends ExportAsCsv
         Queue::connection($connection)->pushOn($queue, $job);
 
         if($this->successCallback instanceof Closure) {
-            return call_user_func($this->successCallback);
+            return call_user_func($this->successCallback, $request, $response);
         });
 
         return $response->successful([
