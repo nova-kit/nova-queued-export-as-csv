@@ -29,6 +29,10 @@ class QueuedExportAsCsv extends ExportAsCsv
      */
     public $deleteFileAfterSend = false;
 
+    /** @var Closure */
+    public $successCallback;
+
+
     /**
      * Construct a new action instance.
      *
@@ -52,6 +56,17 @@ class QueuedExportAsCsv extends ExportAsCsv
     public function withStorageDisk($storageDisk)
     {
         $this->storageDisk = $storageDisk;
+
+        return $this;
+    }
+
+    /**
+     * @param  Closure  $callback
+     * @return $this
+     */
+    public function withCallback(Closure $callback)
+    {
+        $this->successCallback = $callback;
 
         return $this;
     }
@@ -107,6 +122,10 @@ class QueuedExportAsCsv extends ExportAsCsv
         $queue = property_exists($this, 'queue') ? $this->queue : null;
 
         Queue::connection($connection)->pushOn($queue, $job);
+
+        if($this->successCallback instanceof Closure) {
+            return call_user_func($this->successCallback);
+        });
 
         return $response->successful([
             response()->json(
