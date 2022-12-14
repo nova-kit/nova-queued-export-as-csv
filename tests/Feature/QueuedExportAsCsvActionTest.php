@@ -31,4 +31,26 @@ class QueuedExportAsCsvActionTest extends TestCase
             return $job->userId === $user->id;
         });
     }
+
+    /** @test */
+    public function it_can_generate_queued_action_with_custom_response()
+    {
+        Queue::fake();
+
+        $user = UserFactory::new()->create();
+        UserFactory::new()->times(10)->create();
+
+        $response = $this->withoutMix()
+            ->actingAs($user)
+            ->post('/nova-api/subscribers/action?action='.(new QueuedExportAsCsvAction)->uriKey(), [
+                'resources' => 'all',
+            ]);
+
+        $response->assertOk()
+            ->assertJson(['message' => 'Action has been queued!']);
+
+        Queue::assertPushed(function (QueuedExportAsCsvJob $job) use ($user) {
+            return $job->userId === $user->id;
+        });
+    }
 }

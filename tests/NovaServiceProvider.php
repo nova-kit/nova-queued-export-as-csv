@@ -75,7 +75,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     protected function resources()
     {
         Nova::resources([
-            \NovaKit\NovaQueuedExportAsCsv\Tests\Fixtures\Nova\User::class,
+            Fixtures\Nova\Subscriber::class,
+            Fixtures\Nova\User::class,
         ]);
     }
 

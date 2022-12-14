@@ -4,6 +4,7 @@ namespace NovaKit\NovaQueuedExportAsCsv\Tests\Fixtures\Nova;
 
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
+use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Fields\Gravatar;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Password;
@@ -12,7 +13,7 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Resource;
 use NovaKit\NovaQueuedExportAsCsv\Actions\QueuedExportAsCsv;
 
-class User extends Resource
+class Subscriber extends Resource
 {
     /**
      * The model the resource corresponds to.
@@ -109,7 +110,11 @@ class User extends Resource
     public function actions(NovaRequest $request)
     {
         return [
-            QueuedExportAsCsv::make(),
+            QueuedExportAsCsv::make()->then(function () {
+                return response()->json(
+                    Action::message('Action has been queued!')
+                );
+            }),
         ];
     }
 }
