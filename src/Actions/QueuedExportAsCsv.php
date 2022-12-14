@@ -66,10 +66,6 @@ class QueuedExportAsCsv extends ExportAsCsv
      */
     protected function dispatchRequestUsing(ActionRequest $request, Response $response, ActionFields $fields)
     {
-        $this->then(function ($results) {
-            return $results->first();
-        });
-
         $query = $request->toSelectedResourceQuery();
 
         $query->when($this->withQueryCallback instanceof Closure, function ($query) use ($fields) {
