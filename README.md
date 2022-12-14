@@ -45,6 +45,19 @@ return [
 ];
 ```
 
+You can also customise the response message by using the following code:
+
+```php
+use Laravel\Nova\Actions\Action;
+use NovaKit\NovaQueuedExportAsCsv\Actions\QueuedExportAsCsv;
+
+return [
+    QueuedExportAsCsv::make()->then(function () {
+        return response()->json(Action::message('Action has been queued!'));
+    }),
+];
+```
+
 In order to handle the stored CSV, you need to listen to `NovaKit\NovaQueuedExportAsCsv\Events\QueuedCsvExported` event, as an example you can broadcast to Nova's Notification using the following listener class:
 
 ```php
