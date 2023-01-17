@@ -13,7 +13,7 @@ class QueuedCsvExported
     /**
      * The User instance.
      *
-     * @var \Illuminate\Foundation\Auth\User
+     * @var \Illuminate\Contracts\Auth\Authenticatable&\Illuminate\Database\Eloquent\Model
      */
     public $user;
 
@@ -34,7 +34,7 @@ class QueuedCsvExported
     /**
      * Create a new event instance.
      *
-     * @param  \Illuminate\Foundation\Auth\User  $user
+     * @param  \Illuminate\Contracts\Auth\Authenticatable&\Illuminate\Database\Eloquent\Model  $user
      * @param  string  $filename
      * @param  string|null  $storageDisk
      * @return void

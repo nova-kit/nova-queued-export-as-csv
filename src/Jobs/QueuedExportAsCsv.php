@@ -86,6 +86,7 @@ class QueuedExportAsCsv implements ShouldQueue
         /** @phpstan-ignore-next-line */
         $withFormatCallback = ! is_null($this->withFormatCallback) ? \unserialize($this->withFormatCallback)->getClosure() : null;
 
+        /** @var \Illuminate\Contracts\Auth\Authenticatable&\Illuminate\Database\Eloquent\Model $userModel */
         $userModel = Util::userModel();
         $storageDisk = $this->options['storageDisk'];
         $filename = $this->options['filename'];
