@@ -22,7 +22,7 @@
     "require": {
         "php": "^7.3 || ^8.0",
         "laravel/nova": "^4.14",
-        "laravie/serialize-queries": "^2.0",
+        "laravie/serialize-queries": "^2.0|^3.0",
         "laravel/serializable-closure": "^1.0"
     },
     "require-dev": {
