@@ -23,7 +23,8 @@
         "php": "^7.3 || ^8.0",
         "illuminate/support": "^8.83.4 || ^9.51 || ^10.0",
         "laravie/serialize-queries": "^2.0",
-        "laravel/serializable-closure": "^1.0"
+        "laravel/serializable-closure": "^1.0",
+        "composer-runtime-api": "^2.2"
     },
     "require-dev": {
         "guzzlehttp/guzzle": "^7.2",
