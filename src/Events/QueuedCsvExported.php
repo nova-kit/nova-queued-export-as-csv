@@ -35,7 +35,6 @@ class QueuedCsvExported
      * Create a new event instance.
      *
      * @param  \Illuminate\Contracts\Auth\Authenticatable&\Illuminate\Database\Eloquent\Model  $user
-     * @param  string  $filename
      * @param  string|null  $storageDisk
      * @return void
      */
