@@ -78,7 +78,7 @@ class QueuedExportAsCsv implements ShouldQueue
         $query = unserialize($this->query);
 
         $eloquentGenerator = function () use ($query) {
-            foreach ($query->cursor() as $model) {
+            foreach ($query->getModel()->cursor() as $model) {
                 yield $model;
             }
         };
