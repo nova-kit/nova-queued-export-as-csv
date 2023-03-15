@@ -99,10 +99,11 @@ class QueuedExportAsCsv implements ShouldQueue
 
         (new Filesystem())->delete($exportedFilename);
 
+        /** @var \Illuminate\Contracts\Auth\Authenticatable&\Illuminate\Database\Eloquent\Model $user */
+        $user = $userModel::findOrFail($this->userId);
+
         QueuedCsvExported::dispatch(
-            $userModel::find($this->userId),
-            $storedFilename,
-            $storageDisk
+            $user, $storedFilename, $storageDisk
         );
     }
 }
