@@ -3,41 +3,150 @@ name: tests
 on:
   push:
   pull_request:
-  schedule:
-    - cron: '0 0 * * 3'
 
 jobs:
-  laravel-tests:
+  tests-on-laravel-10:
     runs-on: ${{ matrix.os }}
     continue-on-error: ${{ matrix.experimental }}
     strategy:
       matrix:
         os:
           - "ubuntu-latest"
+          - "windows-latest"
         php:
-          - "7.3"
-          - "7.4"
-          - "8.0"
-          - "8.1"
-          - "8.2"
+          - 8.1
+          - 8.2
+        dependencies:
+          - "highest"
+          - "lowest"
+        laravel:
+          - "10.x"
         experimental:
           - false
 
-    name: PHP${{ matrix.php }} with Nova 4 on ${{ matrix.os }}
+    name: Laravel ${{ matrix.laravel }} on PHP${{ matrix.php }}-${{ matrix.os }} (${{ matrix.dependencies }})
 
     steps:
-      - name: "Checkout Repository"
+      - name: Checkout code
         uses: actions/checkout@v3
-
-      - name: Copy .env
-        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, mysql, mysqli, pdo_mysql, bcmath, intl, fileinfo
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, sqlite3, pdo_sqlite, bcmath, fileinfo
           coverage: none
+
+      - name: "Setup CI Authentication"
+        run: |
+          composer config http-basic.nova.laravel.com ${{ secrets.NOVA_USERNAME }} ${{ secrets.NOVA_PASSWORD }}
+
+      - name: Install Laravel Framework ${{ matrix.laravel }}
+        run: |
+          composer require "laravel/framework:${{ matrix.laravel }}" --no-interaction --no-update
+
+      - name: Install dependencies
+        uses: "ramsey/composer-install@v2"
+        with:
+          dependency-versions: "${{ matrix.dependencies }}"
+          composer-options: "--prefer-dist --no-cache"
+
+      - name: Installed dependencies
+        run: composer show -D
+
+      - name: Execute tests
+        run: vendor/bin/phpunit --testdox
+
+  tests-on-laravel-9:
+    runs-on: ${{ matrix.os }}
+    continue-on-error: ${{ matrix.experimental }}
+    strategy:
+      matrix:
+        os:
+          - "ubuntu-latest"
+          - "windows-latest"
+        php:
+          - '8.0'
+          - 8.1
+          - 8.2
+        dependencies:
+          - "highest"
+          - "lowest"
+        laravel:
+          - "9.x"
+        experimental:
+          - false
+
+    name: Laravel ${{ matrix.laravel }} on PHP${{ matrix.php }}-${{ matrix.os }} (${{ matrix.dependencies }})
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, sqlite3, pdo_sqlite, bcmath, fileinfo
+          coverage: none
+
+      - name: "Setup CI Authentication"
+        run: |
+          composer config http-basic.nova.laravel.com ${{ secrets.NOVA_USERNAME }} ${{ secrets.NOVA_PASSWORD }}
+
+      - name: Install Laravel Framework ${{ matrix.laravel }}
+        run: |
+          composer require "laravel/framework:${{ matrix.laravel }}" --no-interaction --no-update
+
+      - name: Install dependencies
+        uses: "ramsey/composer-install@v2"
+        with:
+          dependency-versions: "${{ matrix.dependencies }}"
+          composer-options: "--prefer-dist --no-cache"
+
+      - name: Installed dependencies
+        run: composer show -D
+
+      - name: Execute tests
+        run: vendor/bin/phpunit --testdox
+
+  tests-on-laravel-8:
+    runs-on: ${{ matrix.os }}
+    continue-on-error: ${{ matrix.experimental }}
+    strategy:
+      matrix:
+        os:
+          - "ubuntu-latest"
+          - "windows-latest"
+        php:
+          - 7.3
+          - 7.4
+          - '8.0'
+          - 8.1
+        dependencies:
+          - "highest"
+          - "lowest"
+        laravel:
+          - "8.x"
+        experimental:
+          - false
+
+    name: Laravel ${{ matrix.laravel }} on PHP${{ matrix.php }}-${{ matrix.os }} (${{ matrix.dependencies }})
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, sqlite3, pdo_sqlite, bcmath, fileinfo
+          coverage: none
+
+      - name: Install Laravel Framework ${{ matrix.laravel }}
+        run: |
+          composer require "laravel/framework:${{ matrix.laravel }}" --no-interaction --no-update
 
       - name: "Setup CI Authentication"
         run: |
@@ -46,11 +155,11 @@ jobs:
       - name: Install dependencies
         uses: "ramsey/composer-install@v2"
         with:
-          dependency-versions: "locked"
+          dependency-versions: "${{ matrix.dependencies }}"
           composer-options: "--prefer-dist --no-cache"
 
       - name: Installed dependencies
         run: composer show -D
 
       - name: Execute tests
-        run: vendor/bin/phpunit
+        run: vendor/bin/phpunit --testdox
