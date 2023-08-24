@@ -1,6 +1,6 @@
 <?php
 
-namespace NovaKit\NovaQueuedExportAsCsv\Tests\Fixtures\Nova;
+namespace Workbench\App\Nova;
 
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
