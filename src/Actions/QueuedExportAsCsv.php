@@ -10,8 +10,9 @@ use Laravel\Nova\Actions\Response;
 use Laravel\Nova\Fields\ActionFields;
 use Laravel\Nova\Http\Requests\ActionRequest;
 use Laravel\SerializableClosure\SerializableClosure;
-use function Laravie\SerializesQuery\serialize;
 use NovaKit\NovaQueuedExportAsCsv\Jobs\QueuedExportAsCsv as QueuedExportAsCsvJobs;
+
+use function Laravie\SerializesQuery\serialize;
 
 class QueuedExportAsCsv extends ExportAsCsv
 {
