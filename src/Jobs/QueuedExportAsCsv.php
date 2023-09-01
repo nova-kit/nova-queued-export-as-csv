@@ -12,9 +12,10 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Nova\Util;
-use function Laravie\SerializesQuery\unserialize;
 use NovaKit\NovaQueuedExportAsCsv\Events\QueuedCsvExported;
 use Rap2hpoutre\FastExcel\FastExcel;
+
+use function Laravie\SerializesQuery\unserialize;
 
 class QueuedExportAsCsv implements ShouldQueue
 {
