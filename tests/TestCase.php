@@ -3,15 +3,12 @@
 namespace NovaKit\NovaQueuedExportAsCsv\Tests;
 
 use Illuminate\Support\Facades\Http;
+use Orchestra\Testbench\Concerns\WithLaravelMigrations;
+use Orchestra\Testbench\Concerns\WithWorkbench;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {
-    /**
-     * Automatically enables package discoveries.
-     *
-     * @var bool
-     */
-    protected $enablesPackageDiscoveries = true;
+    use WithLaravelMigrations, WithWorkbench;
 
     /**
      * Setup the test environment.
@@ -25,26 +22,5 @@ class TestCase extends \Orchestra\Testbench\TestCase
         });
 
         parent::setUp();
-    }
-
-    /**
-     * Define database migrations.
-     */
-    protected function defineDatabaseMigrations(): void
-    {
-        $this->loadLaravelMigrations();
-    }
-
-    /**
-     * Get package providers.
-     *
-     * @param  \Illuminate\Foundation\Application  $app
-     * @return array<int, class-string<\Illuminate\Support\ServiceProvider>>
-     */
-    protected function getPackageProviders($app)
-    {
-        return [
-            NovaServiceProvider::class,
-        ];
     }
 }

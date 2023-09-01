@@ -5,11 +5,11 @@ namespace NovaKit\NovaQueuedExportAsCsv\Tests\Feature;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
-use function Laravie\SerializesQuery\serialize;
 use NovaKit\NovaQueuedExportAsCsv\Events\QueuedCsvExported;
 use NovaKit\NovaQueuedExportAsCsv\Jobs\QueuedExportAsCsv as QueuedExportAsCsvJob;
 use NovaKit\NovaQueuedExportAsCsv\Tests\TestCase;
 use Orchestra\Testbench\Factories\UserFactory;
+use function Laravie\SerializesQuery\serialize;
 
 class QueuedExportAsCsvJobTest extends TestCase
 {

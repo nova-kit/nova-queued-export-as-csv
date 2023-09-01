@@ -8,6 +8,7 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use NovaKit\NovaQueuedExportAsCsv\Actions\QueuedExportAsCsv;
 
 class User extends Resource
 {
@@ -98,6 +99,8 @@ class User extends Resource
      */
     public function actions(NovaRequest $request)
     {
-        return [];
+        return [
+            QueuedExportAsCsv::make(),
+        ];
     }
 }
