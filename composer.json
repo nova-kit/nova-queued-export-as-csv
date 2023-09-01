@@ -51,8 +51,7 @@
     "scripts": {
         "post-autoload-dump": [
             "@clear",
-            "@prepare",
-            "@php vendor/bin/testbench package:discover --ansi"
+            "@prepare"
         ],
         "clear": "@php vendor/bin/testbench package:purge-skeleton --ansi",
         "prepare": "@php vendor/bin/testbench package:discover --ansi",
@@ -62,7 +61,6 @@
             "@php vendor/bin/testbench serve"
         ],
         "lint": [
-            "pint",
             "@php vendor/bin/phpstan analyse"
         ],
         "test": [
