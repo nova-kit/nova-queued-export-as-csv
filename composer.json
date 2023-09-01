@@ -16,7 +16,10 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "NovaKit\\NovaQueuedExportAsCsv\\Tests\\": "tests/"
+            "NovaKit\\NovaQueuedExportAsCsv\\Tests\\": "tests/",
+            "Workbench\\App\\": "workbench/app/",
+            "Workbench\\Database\\Factories\\": "workbench/database/factories/",
+            "Workbench\\Database\\Seeders\\": "workbench/database/seeders/"
         }
     },
     "require": {
@@ -29,10 +32,10 @@
     "require-dev": {
         "guzzlehttp/guzzle": "^7.2",
         "laravel/nova": "^4.14",
-        "nunomaduro/larastan": "^1.0.1 || ^2.4",
-        "orchestra/canvas": "^6.10.3 || ^7.2.1 || ^8.0",
-        "orchestra/testbench": "^6.25 || ^7.22 || ^8.0",
-        "phpunit/phpunit": "^9.6"
+        "nunomaduro/larastan": "^2.4",
+        "orchestra/testbench": "^7.30 || ^8.10",
+        "phpunit/phpunit": "^9.6",
+        "nova-kit/nova-devtool": "^1.2.1"
     },
     "repositories": [
         {
@@ -46,7 +49,25 @@
         }
     },
     "scripts": {
-        "post-autoload-dump": "@php vendor/bin/testbench package:discover --ansi"
+        "post-autoload-dump": [
+            "@clear",
+            "@prepare",
+            "@php vendor/bin/testbench package:discover --ansi"
+        ],
+        "clear": "@php vendor/bin/testbench package:purge-skeleton --ansi",
+        "prepare": "@php vendor/bin/testbench package:discover --ansi",
+        "build": "@php vendor/bin/testbench workbench:build --ansi",
+        "serve": [
+            "@build",
+            "@php vendor/bin/testbench serve"
+        ],
+        "lint": [
+            "pint",
+            "@php vendor/bin/phpstan analyse"
+        ],
+        "test": [
+            "@php vendor/bin/phpunit"
+        ]
     },
     "prefer-stable": true,
     "minimum-stability": "dev"
