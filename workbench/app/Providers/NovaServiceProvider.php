@@ -1,10 +1,11 @@
 <?php
 
-namespace NovaKit\NovaQueuedExportAsCsv\Tests;
+namespace Workbench\App\Providers;
 
 use Illuminate\Support\Facades\Gate;
-use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
+use NovaKit\NovaDevTool\Nova;
+use Orchestra\Workbench\Workbench;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
@@ -53,7 +54,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     protected function dashboards()
     {
         return [
-            new \Laravel\Nova\Dashboards\Main,
+            new \Laravel\Nova\Dashboards\Main(),
         ];
     }
 
@@ -74,10 +75,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
      */
     protected function resources()
     {
-        Nova::resources([
-            Fixtures\Nova\Subscriber::class,
-            Fixtures\Nova\User::class,
-        ]);
+        Nova::resourcesIn(Workbench::path('app/Nova'));
     }
 
     /**

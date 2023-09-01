@@ -1,6 +1,6 @@
 <?php
 
-namespace NovaKit\NovaQueuedExportAsCsv\Tests\Fixtures\Nova;
+namespace Workbench\App\Nova;
 
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
@@ -10,7 +10,6 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Laravel\Nova\Resource;
 use NovaKit\NovaQueuedExportAsCsv\Actions\QueuedExportAsCsv;
 
 class Subscriber extends Resource
@@ -18,7 +17,7 @@ class Subscriber extends Resource
     /**
      * The model the resource corresponds to.
      *
-     * @var string
+     * @var class-string<\Illuminate\Foundation\Auth\User>
      */
     public static $model = \Illuminate\Foundation\Auth\User::class;
 

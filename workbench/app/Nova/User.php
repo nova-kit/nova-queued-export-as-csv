@@ -1,15 +1,13 @@
 <?php
 
-namespace NovaKit\NovaQueuedExportAsCsv\Tests\Fixtures\Nova;
+namespace Workbench\App\Nova;
 
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
-use Laravel\Nova\Fields\Gravatar;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Laravel\Nova\Resource;
 use NovaKit\NovaQueuedExportAsCsv\Actions\QueuedExportAsCsv;
 
 class User extends Resource
@@ -46,8 +44,6 @@ class User extends Resource
     {
         return [
             ID::make()->sortable(),
-
-            Gravatar::make()->maxWidth(50),
 
             Text::make('Name')
                 ->sortable()
