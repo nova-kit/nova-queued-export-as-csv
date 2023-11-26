@@ -62,6 +62,7 @@ class QueuedExportAsCsv extends ExportAsCsv
      *
      * @return \Laravel\Nova\Actions\Response
      */
+    #[\Override]
     protected function dispatchRequestUsing(ActionRequest $request, Response $response, ActionFields $fields)
     {
         $query = $request->toSelectedResourceQuery();
