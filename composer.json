@@ -33,8 +33,8 @@
         "guzzlehttp/guzzle": "^7.2",
         "laravel/nova": "^4.14",
         "nunomaduro/larastan": "^2.4",
-        "orchestra/testbench": "^7.30 || ^8.19",
-        "phpunit/phpunit": "^9.6",
+        "orchestra/testbench": "^7.30 || ^8.19 || ^9.0",
+        "phpunit/phpunit": "^9.6 || ^10.1",
         "nova-kit/nova-devtool": "^1.2.1"
     },
     "repositories": [
