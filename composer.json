@@ -25,16 +25,16 @@
     "require": {
         "php": "^7.3 || ^8.0",
         "composer-runtime-api": "^2.2",
-        "illuminate/support": "^8.83.4 || ^9.51 || ^10.0",
+        "illuminate/support": "^8.83.4 || ^9.51 || ^10.0 || ^11.0",
         "laravie/serialize-queries": "^2.0 || ^3.0",
         "laravel/serializable-closure": "^1.0"
     },
     "require-dev": {
         "guzzlehttp/guzzle": "^7.2",
         "larastan/larastan": "^2.4",
-        "laravel/nova": "^4.14",
-        "orchestra/testbench": "^7.30 || ^8.10",
-        "phpunit/phpunit": "^9.6",
+        "laravel/nova": "*",
+        "orchestra/testbench": "^7.30 || ^8.19 || ^9.0",
+        "phpunit/phpunit": "^9.6 || ^10.1",
         "nova-kit/nova-devtool": "^1.2.1"
     },
     "repositories": [
