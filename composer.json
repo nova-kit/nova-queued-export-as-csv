@@ -31,8 +31,8 @@
     },
     "require-dev": {
         "guzzlehttp/guzzle": "^7.2",
+        "larastan/larastan": "^2.4",
         "laravel/nova": "^4.14",
-        "nunomaduro/larastan": "^2.4",
         "orchestra/testbench": "^7.30 || ^8.10",
         "phpunit/phpunit": "^9.6",
         "nova-kit/nova-devtool": "^1.2.1"
