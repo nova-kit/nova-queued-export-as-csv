@@ -65,6 +65,10 @@
         ],
         "test": [
             "@php vendor/bin/phpunit"
+        ],
+        "ci": [
+            "@lint",
+            "@test"
         ]
     },
     "prefer-stable": true,
