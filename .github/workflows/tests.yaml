@@ -70,7 +70,7 @@ jobs:
         experimental:
           - false
 
-    name: Laravel ${{ matrix.laravel }} on PHP${{ matrix.php }}-${{ matrix.os }} (${{ matrix.dependencies }})
+    name: Laravel:${{ matrix.laravel }} on PHP:${{ matrix.php }}-${{ matrix.os }} (${{ matrix.dependencies }})
 
     steps:
       - name: Checkout code
