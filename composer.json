@@ -27,7 +27,8 @@
         "composer-runtime-api": "^2.2",
         "illuminate/support": "^8.83.4 || ^9.51 || ^10.0 || ^11.0",
         "laravie/serialize-queries": "^2.0 || ^3.0",
-        "laravel/serializable-closure": "^1.0"
+        "laravel/serializable-closure": "^1.0",
+        "symfony/polyfill-php83": "^1.28"
     },
     "require-dev": {
         "guzzlehttp/guzzle": "^7.2",
