@@ -34,6 +34,7 @@
         "guzzlehttp/guzzle": "^7.2",
         "larastan/larastan": "^2.4",
         "laravel/nova": "dev-develop",
+        "laravel/pint": "^1.6",
         "orchestra/testbench": "^8.20 || ^9.0",
         "nova-kit/nova-devtool": "^2.0"
     },
