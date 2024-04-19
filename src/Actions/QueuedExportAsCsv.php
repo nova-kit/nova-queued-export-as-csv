@@ -33,11 +33,9 @@ class QueuedExportAsCsv extends ExportAsCsv
     /**
      * Construct a new action instance.
      *
-     * @param  string|null  $name
-     * @param  string|null  $storageDisk
      * @return void
      */
-    public function __construct($name = null, $storageDisk = null)
+    public function __construct(?string $name = null, ?string $storageDisk = null)
     {
         parent::__construct($name);
 
@@ -47,10 +45,9 @@ class QueuedExportAsCsv extends ExportAsCsv
     /**
      * Set the storage disk.
      *
-     * @param  string|null  $storageDisk
      * @return $this
      */
-    public function withStorageDisk($storageDisk)
+    public function withStorageDisk(?string $storageDisk)
     {
         $this->storageDisk = $storageDisk;
 

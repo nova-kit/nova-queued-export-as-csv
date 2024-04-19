@@ -22,27 +22,6 @@ class QueuedExportAsCsv implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
-     * The query builder.
-     *
-     * @var array<string, mixed>
-     */
-    public $query;
-
-    /**
-     * The User ID.
-     *
-     * @var string|int
-     */
-    public $userId;
-
-    /**
-     * The custom format callback.
-     *
-     * @var (callable(\Illuminate\Database\Eloquent\Model):array<string, mixed>)|null
-     */
-    public $withFormatCallback;
-
-    /**
      * The configuration options.
      *
      * @var array{filename: string, storageDisk: string|null, notify: string}
@@ -53,17 +32,16 @@ class QueuedExportAsCsv implements ShouldQueue
      * Create a new job instance.
      *
      * @param  array<string, mixed>  $query
-     * @param  string|int  $userId
      * @param  (callable(\Illuminate\Database\Eloquent\Model):array<string, mixed>)|null  $withFormatCallback
      * @param  array{filename: string, storageDisk: string|null, notify: string}  $options
      * @return void
      */
-    public function __construct(array $query, $userId, $withFormatCallback, array $options)
-    {
-        $this->query = $query;
-        $this->userId = $userId;
-        $this->withFormatCallback = $withFormatCallback;
-
+    public function __construct(
+        public array $query,
+        public string|int $userId,
+        public $withFormatCallback,
+        array $options
+    ) {
         $this->options = array_merge([
             'storageDisk' => null,
         ], $options);
@@ -74,7 +52,7 @@ class QueuedExportAsCsv implements ShouldQueue
      *
      * @return void
      */
-    public function handle()
+    public function handle(): void
     {
         $query = unserialize($this->query);
 
