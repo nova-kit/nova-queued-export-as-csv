@@ -62,6 +62,7 @@
             "@php vendor/bin/testbench serve"
         ],
         "lint": [
+            "@php vendor/bin/pint",
             "@php vendor/bin/phpstan analyse"
         ],
         "test": [
