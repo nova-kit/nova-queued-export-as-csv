@@ -4,12 +4,14 @@ namespace NovaKit\NovaQueuedExportAsCsv\Tests;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
-use Orchestra\Testbench\Concerns\WithLaravelMigrations;
+use Orchestra\Testbench\Attributes\WithMigration;
 use Orchestra\Testbench\Concerns\WithWorkbench;
 
+#[WithMigration]
 class TestCase extends \Orchestra\Testbench\TestCase
 {
-    use RefreshDatabase, WithLaravelMigrations, WithWorkbench;
+    use RefreshDatabase;
+    use WithWorkbench;
 
     /**
      * Setup the test environment.

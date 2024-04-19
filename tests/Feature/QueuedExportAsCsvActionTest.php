@@ -7,10 +7,11 @@ use NovaKit\NovaQueuedExportAsCsv\Actions\QueuedExportAsCsv as QueuedExportAsCsv
 use NovaKit\NovaQueuedExportAsCsv\Jobs\QueuedExportAsCsv as QueuedExportAsCsvJob;
 use NovaKit\NovaQueuedExportAsCsv\Tests\TestCase;
 use Orchestra\Testbench\Factories\UserFactory;
+use PHPUnit\Framework\Attributes\Test;
 
 class QueuedExportAsCsvActionTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_can_generate_queued_action()
     {
         Queue::fake();
@@ -31,7 +32,7 @@ class QueuedExportAsCsvActionTest extends TestCase
         });
     }
 
-    /** @test */
+    #[Test]
     public function it_can_generate_queued_action_with_custom_response()
     {
         Queue::fake();

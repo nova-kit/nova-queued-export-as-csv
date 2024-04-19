@@ -14,7 +14,7 @@ use function Laravie\SerializesQuery\serialize;
 
 class QueuedExportAsCsvJobTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_can_generate_export_file_from_job()
     {
         Event::fake();
