@@ -9,6 +9,7 @@ use NovaKit\NovaQueuedExportAsCsv\Events\QueuedCsvExported;
 use NovaKit\NovaQueuedExportAsCsv\Jobs\QueuedExportAsCsv as QueuedExportAsCsvJob;
 use NovaKit\NovaQueuedExportAsCsv\Tests\TestCase;
 use Orchestra\Testbench\Factories\UserFactory;
+use PHPUnit\Framework\Attributes\Test;
 
 use function Laravie\SerializesQuery\serialize;
 
