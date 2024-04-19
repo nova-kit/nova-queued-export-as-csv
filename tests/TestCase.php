@@ -14,6 +14,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
     /**
      * Setup the test environment.
      */
+    #[\Override]
     protected function setUp(): void
     {
         $this->afterApplicationCreated(function () {
