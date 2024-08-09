@@ -5,6 +5,7 @@ namespace Workbench\App\Nova;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
 use Laravel\Nova\Actions\Action;
+use Laravel\Nova\Auth\PasswordValidationRules;
 use Laravel\Nova\Fields\Gravatar;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Password;
@@ -14,6 +15,8 @@ use NovaKit\NovaQueuedExportAsCsv\Actions\QueuedExportAsCsv;
 
 class Subscriber extends Resource
 {
+    use PasswordValidationRules;
+
     /**
      * The model the resource corresponds to.
      *
@@ -42,7 +45,7 @@ class Subscriber extends Resource
      *
      * @return array
      */
-    public function fields(NovaRequest $request)
+    public function fields(NovaRequest $request): array
     {
         return [
             ID::make()->sortable(),
@@ -61,8 +64,8 @@ class Subscriber extends Resource
 
             Password::make('Password')
                 ->onlyOnForms()
-                ->creationRules('required', Rules\Password::defaults())
-                ->updateRules('nullable', Rules\Password::defaults()),
+                ->creationRules($this->passwordRules())
+                ->updateRules($this->optionalPasswordRules()),
         ];
     }
 
@@ -71,7 +74,7 @@ class Subscriber extends Resource
      *
      * @return array
      */
-    public function cards(NovaRequest $request)
+    public function cards(NovaRequest $request): array
     {
         return [];
     }
@@ -81,7 +84,7 @@ class Subscriber extends Resource
      *
      * @return array
      */
-    public function filters(NovaRequest $request)
+    public function filters(NovaRequest $request): array
     {
         return [];
     }
@@ -91,7 +94,7 @@ class Subscriber extends Resource
      *
      * @return array
      */
-    public function lenses(NovaRequest $request)
+    public function lenses(NovaRequest $request): array
     {
         return [];
     }
@@ -101,7 +104,7 @@ class Subscriber extends Resource
      *
      * @return array
      */
-    public function actions(NovaRequest $request)
+    public function actions(NovaRequest $request): array
     {
         return [
             QueuedExportAsCsv::make()->then(function () {

@@ -33,15 +33,22 @@
     "require-dev": {
         "guzzlehttp/guzzle": "^7.2",
         "larastan/larastan": "^2.4",
-        "laravel/nova": "*",
+        "laravel/nova": "dev-develop",
         "laravel/pint": "^1.6",
         "orchestra/testbench": "^8.20 || ^9.0",
-        "nova-kit/nova-devtool": "^2.0"
+        "laravel/nova-devtool": "^1.0"
+    },
+    "conflict": {
+        "laravel/nova": "<5.0.0 || >=6.0.0"
     },
     "repositories": [
         {
             "type": "composer",
             "url": "https://nova.laravel.com"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/laravel/nova-devtool"
         }
     ],
     "extra": {
@@ -58,6 +65,7 @@
         "prepare": "@php vendor/bin/testbench package:discover --ansi",
         "build": "@php vendor/bin/testbench workbench:build --ansi",
         "serve": [
+            "Composer\\Config::disableProcessTimeout",
             "@build",
             "@php vendor/bin/testbench serve"
         ],
