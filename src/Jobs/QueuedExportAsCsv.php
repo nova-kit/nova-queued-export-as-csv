@@ -73,7 +73,7 @@ class QueuedExportAsCsv implements ShouldQueue
             'nova-actions-export-as-csv', new File($exportedFilename), $filename, 'public'
         );
 
-        (new Filesystem())->delete($exportedFilename);
+        (new Filesystem)->delete($exportedFilename);
 
         /** @var \Illuminate\Contracts\Auth\Authenticatable&\Illuminate\Database\Eloquent\Model $user */
         $user = $userModel::findOrFail($this->userId);

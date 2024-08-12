@@ -56,8 +56,6 @@ class QueuedExportAsCsv extends ExportAsCsv
 
     /**
      * Perform the action request using custom dispatch handler.
-     *
-     * @return \Laravel\Nova\Actions\Response
      */
     #[\Override]
     protected function dispatchRequestUsing(ActionRequest $request, Response $response, ActionFields $fields): Response

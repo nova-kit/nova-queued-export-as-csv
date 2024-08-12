@@ -50,7 +50,7 @@ jobs:
         run: composer show -D
 
       - name: Execute tests
-        run: vendor/bin/phpunit --testdox
+        run: composer run test
 
   tests-on-laravel-10:
     runs-on: ${{ matrix.os }}
@@ -97,4 +97,4 @@ jobs:
         run: composer show -D
 
       - name: Execute tests
-        run: vendor/bin/phpunit --testdox
+        run: composer run test
