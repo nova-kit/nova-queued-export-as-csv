@@ -18,17 +18,13 @@ class QueuedExportAsCsv extends ExportAsCsv
 {
     /**
      * Storage disk used to store the file.
-     *
-     * @var string|null
      */
-    public $storageDisk;
+    public ?string $storageDisk;
 
     /**
      * Determine if file should be deleted after send.
-     *
-     * @var bool
      */
-    public $deleteFileAfterSend = false;
+    public bool $deleteFileAfterSend = false;
 
     /**
      * Construct a new action instance.

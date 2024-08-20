@@ -25,7 +25,7 @@ class QueuedExportAsCsv implements ShouldQueue
      *
      * @var array{filename: string, storageDisk: string|null, notify: string}
      */
-    public $options;
+    public array $options;
 
     /**
      * Create a new job instance.
