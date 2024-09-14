@@ -34,11 +34,10 @@
         "guzzlehttp/guzzle": "^7.2",
         "larastan/larastan": "^2.4",
         "laravel/nova": "^4.35",
-        "laravel/nova-devtool": "^1.0",
         "laravel/pint": "^1.17",
+        "nova-kit/nova-devtool": "^1.0",
         "orchestra/testbench": "^8.20 || ^9.0",
-        "phpstan/phpstan": "^1.11",
-        "orchestra/pest-plugin-testbench": "^2.0"
+        "phpstan/phpstan": "^1.11"
     },
     "repositories": [
         {
