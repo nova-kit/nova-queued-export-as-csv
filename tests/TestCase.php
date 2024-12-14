@@ -1,28 +1,14 @@
 <?php
 
-namespace NovaKit\NovaQueuedExportAsCsv\Tests;
+namespace Tests;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Http;
-use Orchestra\Testbench\Concerns\WithLaravelMigrations;
+use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
+use Laravel\Nova\Testing\Concerns\InteractsWithNova;
 use Orchestra\Testbench\Concerns\WithWorkbench;
 
-class TestCase extends \Orchestra\Testbench\TestCase
+abstract class TestCase extends \Orchestra\Testbench\TestCase
 {
-    use RefreshDatabase, WithLaravelMigrations, WithWorkbench;
-
-    /**
-     * Setup the test environment.
-     */
-    #[\Override]
-    protected function setUp(): void
-    {
-        $this->afterApplicationCreated(function () {
-            Http::fake([
-                'nova.laravel.com/*' => Http::response([], 200),
-            ]);
-        });
-
-        parent::setUp();
-    }
+    use InteractsWithNova;
+    use LazilyRefreshDatabase;
+    use WithWorkbench;
 }

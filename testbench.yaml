@@ -9,7 +9,9 @@ seeders:
 
 workbench:
   start: /nova
+  user: nova@laravel.com
   build:
+    - package:discover
     - asset-publish
     - create-sqlite-db
     - db:wipe

@@ -5,7 +5,6 @@ namespace NovaKit\NovaQueuedExportAsCsv\Jobs;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Foundation\Auth\User;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Http\File;
 use Illuminate\Queue\InteractsWithQueue;
@@ -22,48 +21,26 @@ class QueuedExportAsCsv implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
-     * The query builder.
-     *
-     * @var array<string, mixed>
-     */
-    public $query;
-
-    /**
-     * The User ID.
-     *
-     * @var string|int
-     */
-    public $userId;
-
-    /**
-     * The custom format callback.
-     *
-     * @var (callable(\Illuminate\Database\Eloquent\Model):array<string, mixed>)|null
-     */
-    public $withFormatCallback;
-
-    /**
      * The configuration options.
      *
      * @var array{filename: string, storageDisk: string|null, notify: string}
      */
-    public $options;
+    public array $options;
 
     /**
      * Create a new job instance.
      *
      * @param  array<string, mixed>  $query
-     * @param  string|int  $userId
      * @param  (callable(\Illuminate\Database\Eloquent\Model):array<string, mixed>)|null  $withFormatCallback
      * @param  array{filename: string, storageDisk: string|null, notify: string}  $options
      * @return void
      */
-    public function __construct(array $query, $userId, $withFormatCallback, array $options)
-    {
-        $this->query = $query;
-        $this->userId = $userId;
-        $this->withFormatCallback = $withFormatCallback;
-
+    public function __construct(
+        public array $query,
+        public string|int $userId,
+        public $withFormatCallback,
+        array $options
+    ) {
         $this->options = array_merge([
             'storageDisk' => null,
         ], $options);
@@ -71,10 +48,8 @@ class QueuedExportAsCsv implements ShouldQueue
 
     /**
      * Execute the job.
-     *
-     * @return void
      */
-    public function handle()
+    public function handle(): void
     {
         $query = unserialize($this->query);
 
@@ -98,7 +73,7 @@ class QueuedExportAsCsv implements ShouldQueue
             'nova-actions-export-as-csv', new File($exportedFilename), $filename, 'public'
         );
 
-        (new Filesystem())->delete($exportedFilename);
+        (new Filesystem)->delete($exportedFilename);
 
         /** @var \Illuminate\Contracts\Auth\Authenticatable&\Illuminate\Database\Eloquent\Model $user */
         $user = $userModel::findOrFail($this->userId);

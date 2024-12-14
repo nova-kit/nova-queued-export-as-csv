@@ -18,26 +18,20 @@ class QueuedExportAsCsv extends ExportAsCsv
 {
     /**
      * Storage disk used to store the file.
-     *
-     * @var string|null
      */
-    public $storageDisk;
+    public ?string $storageDisk;
 
     /**
      * Determine if file should be deleted after send.
-     *
-     * @var bool
      */
-    public $deleteFileAfterSend = false;
+    public bool $deleteFileAfterSend = false;
 
     /**
      * Construct a new action instance.
      *
-     * @param  string|null  $name
-     * @param  string|null  $storageDisk
      * @return void
      */
-    public function __construct($name = null, $storageDisk = null)
+    public function __construct(?string $name = null, ?string $storageDisk = null)
     {
         parent::__construct($name);
 
@@ -47,10 +41,9 @@ class QueuedExportAsCsv extends ExportAsCsv
     /**
      * Set the storage disk.
      *
-     * @param  string|null  $storageDisk
      * @return $this
      */
-    public function withStorageDisk($storageDisk)
+    public function withStorageDisk(?string $storageDisk)
     {
         $this->storageDisk = $storageDisk;
 
@@ -59,11 +52,9 @@ class QueuedExportAsCsv extends ExportAsCsv
 
     /**
      * Perform the action request using custom dispatch handler.
-     *
-     * @return \Laravel\Nova\Actions\Response
      */
     #[\Override]
-    protected function dispatchRequestUsing(ActionRequest $request, Response $response, ActionFields $fields)
+    protected function dispatchRequestUsing(ActionRequest $request, Response $response, ActionFields $fields): Response
     {
         $query = $request->toSelectedResourceQuery();
 

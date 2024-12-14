@@ -10,8 +10,10 @@ parameters:
   # The level 8 is the highest level
   level: 6
 
-  checkMissingIterableValueType: false
+  ignoreErrors:
+    - identifier: missingType.generics
+    - identifier: missingType.iterableValue
+
   noUnnecessaryCollectionCall: false
   checkModelProperties: false
   reportUnmatchedIgnoredErrors: false
-  checkGenericClassInNonGenericObjectType: false
