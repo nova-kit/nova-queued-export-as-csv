@@ -21,15 +21,17 @@ You can replace `Laravel\Nova\Actions\ExportAsCsv` with `NovaKit\NovaQueuedExpor
 
 ```php
 use Laravel\Nova\Actions\ExportAsCsv;
+use Laravel\Nova\Http\Requests\NovaRequest;
 use NovaKit\NovaQueuedExportAsCsv\Actions\QueuedExportAsCsv;
+
+// ...
 
 /**
  * Get the actions available for the resource.
  *
- * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
- * @return array
+ * @return array<int, \Laravel\Nova\Actions\Action>
  */
-public function actions(NovaRequest $request)
+public function actions(NovaRequest $request): array
 {
     return [
         QueuedExportAsCsv::make(),
@@ -40,6 +42,10 @@ public function actions(NovaRequest $request)
 If you would like to change the storage disk to store the CSV file that is available for download, you may invoke the `withStorageDisk()` method when registering the action:
 
 ```php
+use NovaKit\NovaQueuedExportAsCsv\Actions\QueuedExportAsCsv;
+
+// ...
+
 return [
     QueuedExportAsCsv::make()->withStorageDisk('s3'),
 ];
@@ -50,6 +56,8 @@ You can also customise the response message by using the following code:
 ```php
 use Laravel\Nova\Actions\Action;
 use NovaKit\NovaQueuedExportAsCsv\Actions\QueuedExportAsCsv;
+
+// ...
 
 return [
     QueuedExportAsCsv::make()->then(function () {
