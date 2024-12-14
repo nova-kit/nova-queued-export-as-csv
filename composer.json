@@ -37,8 +37,8 @@
         "laravel/nova-devtool": "^1.0.1",
         "laravel/pint": "^1.17",
         "orchestra/testbench": "^8.20 || ^9.0",
-        "phpstan/phpstan": "^1.11",
-        "orchestra/pest-plugin-testbench": "^2.0"
+        "orchestra/pest-plugin-testbench": "^2.0",
+        "phpstan/phpstan": "^1.11"
     },
     "conflict": {
         "laravel/nova": "<5.0.0 || >=6.0.0"
