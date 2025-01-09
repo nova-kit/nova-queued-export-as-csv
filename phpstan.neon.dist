@@ -1,7 +1,3 @@
-includes:
-  - ./vendor/larastan/larastan/extension.neon
-
-
 parameters:
 
   paths:
@@ -14,6 +10,4 @@ parameters:
     - identifier: missingType.generics
     - identifier: missingType.iterableValue
 
-  noUnnecessaryCollectionCall: false
-  checkModelProperties: false
   reportUnmatchedIgnoredErrors: false
