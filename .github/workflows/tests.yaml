@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  tests-on-laravel-12:
+  tests-on-laravel-13:
     runs-on: ${{ matrix.os }}
     continue-on-error: ${{ matrix.experimental }}
     strategy:
@@ -14,13 +14,13 @@ jobs:
         os:
           - "ubuntu-latest"
         php:
-          - 8.2
           - 8.3
           - 8.4
+          - 8.5
         dependencies:
           - "highest"
         laravel:
-          - "12.x"
+          - "13.x"
         experimental:
           - false
 
@@ -28,7 +28,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -42,7 +42,55 @@ jobs:
           composer config http-basic.nova.laravel.com ${{ secrets.NOVA_USERNAME }} ${{ secrets.NOVA_PASSWORD }}
 
       - name: Install dependencies
-        uses: "ramsey/composer-install@v3"
+        uses: ramsey/composer-install@v4
+        with:
+          dependency-versions: "${{ matrix.dependencies }}"
+          composer-options: "--prefer-dist --no-cache --with=laravel/framework:${{ matrix.laravel }}"
+
+      - name: Installed dependencies
+        run: composer show -D
+
+      - name: Execute tests
+        run: composer run test
+
+  tests-on-laravel-12:
+    runs-on: ${{ matrix.os }}
+    continue-on-error: ${{ matrix.experimental }}
+    strategy:
+      matrix:
+        os:
+          - "ubuntu-latest"
+        php:
+          - 8.2
+          - 8.3
+          - 8.4
+          - 8.5
+        dependencies:
+          - "highest"
+        laravel:
+          - "12.x"
+        experimental:
+          - false
+
+    name: Laravel ${{ matrix.laravel }} on PHP${{ matrix.php }}-${{ matrix.os }} (${{ matrix.dependencies }})
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, sqlite3, pdo_sqlite, bcmath, fileinfo
+          coverage: none
+
+      - name: "Setup CI Authentication"
+        run: |
+          composer config http-basic.nova.laravel.com ${{ secrets.NOVA_USERNAME }} ${{ secrets.NOVA_PASSWORD }}
+
+      - name: Install dependencies
+        uses: ramsey/composer-install@v4
         with:
           dependency-versions: "${{ matrix.dependencies }}"
           composer-options: "--prefer-dist --no-cache --with=laravel/framework:${{ matrix.laravel }}"
@@ -75,7 +123,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -89,7 +137,7 @@ jobs:
           composer config http-basic.nova.laravel.com ${{ secrets.NOVA_USERNAME }} ${{ secrets.NOVA_PASSWORD }}
 
       - name: Install dependencies
-        uses: "ramsey/composer-install@v3"
+        uses: ramsey/composer-install@v4
         with:
           dependency-versions: "${{ matrix.dependencies }}"
           composer-options: "--prefer-dist --no-cache --with=laravel/framework:${{ matrix.laravel }}"
@@ -122,7 +170,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -136,7 +184,7 @@ jobs:
           composer config http-basic.nova.laravel.com ${{ secrets.NOVA_USERNAME }} ${{ secrets.NOVA_PASSWORD }}
 
       - name: Install dependencies
-        uses: "ramsey/composer-install@v3"
+        uses: ramsey/composer-install@v4
         with:
           dependency-versions: "${{ matrix.dependencies }}"
           composer-options: "--prefer-dist --no-cache --with=laravel/framework:${{ matrix.laravel }}"
