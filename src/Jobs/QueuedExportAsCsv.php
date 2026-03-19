@@ -10,6 +10,7 @@ use Illuminate\Http\File;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Storage;
+use Laravel\Nova\Actions\Responses\StreamExportableCsv;
 use Laravel\Nova\Util;
 use NovaKit\NovaQueuedExportAsCsv\Events\QueuedCsvExported;
 use Rap2hpoutre\FastExcel\FastExcel;
@@ -67,7 +68,7 @@ class QueuedExportAsCsv implements ShouldQueue
         $storageDisk = $this->options['storageDisk'];
         $filename = $this->options['filename'];
 
-        $exportedFilename = (new FastExcel($eloquentGenerator()))->export("/tmp/{$filename}", $withFormatCallback);
+        $exportedFilename = (new StreamExportableCsv($eloquentGenerator()))->export("/tmp/{$filename}", $withFormatCallback);
 
         $storedFilename = Storage::disk($storageDisk)->putFileAs(
             'nova-actions-export-as-csv', new File($exportedFilename), $filename, 'public'
