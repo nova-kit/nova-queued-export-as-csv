@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Storage;
 use Laravel\Nova\Actions\Responses\StreamExportableCsv;
 use Laravel\Nova\Util;
 use NovaKit\NovaQueuedExportAsCsv\Events\QueuedCsvExported;
-use Rap2hpoutre\FastExcel\FastExcel;
 
 use function Laravie\SerializesQuery\unserialize;
 
