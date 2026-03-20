@@ -1,6 +1,7 @@
 {
   "preset": "laravel",
   "rules": {
+    "fully_qualified_strict_types": false,
     "method_chaining_indentation": false,
     "no_superfluous_phpdoc_tags": {
       "allow_mixed": true

@@ -17,6 +17,8 @@ jobs:
           - 8.1
           - 8.2
           - 8.3
+          - 8.4
+          - 8.5
         experimental:
           - true
 
@@ -38,7 +40,7 @@ jobs:
           composer config http-basic.nova.laravel.com ${{ secrets.NOVA_USERNAME }} ${{ secrets.NOVA_PASSWORD }}
 
       - name: Install dependencies
-        uses: "ramsey/composer-install@v3"
+        uses: ramsey/composer-install@v4
         with:
           dependency-versions: "highest"
           composer-options: "--prefer-dist --prefer-stable --no-cache"
